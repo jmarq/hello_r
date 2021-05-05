@@ -2,5 +2,6 @@
 # it seems to create an Rplots.pdf file that contains the resulting visualization
 
 nums = c(1,2,3)
-doubled_nums = nums * 2
+doubled_nums <- nums * 2
 plot(nums,doubled_nums)
+print(sum(doubled_nums))
