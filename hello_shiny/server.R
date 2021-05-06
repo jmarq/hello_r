@@ -8,6 +8,7 @@
 #
 
 library(shiny)
+library(vegalite)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
@@ -29,6 +30,16 @@ shinyServer(function(input, output) {
     multiplied_nums <- nums * input$bins
     plot(nums, multiplied_nums)
     
+  })
+
+  output$vegaPlot <- renderVegalite({
+    vegalite(viewport_width=500, viewport_height=500) %>%
+      cell_size(400, 400) %>%
+      add_data(faithful) %>%
+      encode_x("waiting", "quantitative") %>%
+      encode_y("eruptions", "quantitative") %>%
+      bin_x(maxbins=input$bins) %>%
+      mark_point()
   })
   
 })
