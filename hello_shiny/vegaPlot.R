@@ -6,7 +6,20 @@ import(datasets)
 vegaPlotUI <- function(id, label = "vegaPlotLabel") {
   # namespace "translation" function
   ns <- NS(id)
-  vegaliteOutput(ns("vegaPlot"))
+  div(
+    h1("vega time, pals"),
+    p("trying out Shiny modules and this vegalite R package"),
+    vegaliteOutput(ns("vegaPlot"))
+  )
+}
+
+vegaPlotInput <- function(id, label="vegaPlotSlider") {
+  ns <-NS(id)
+  sliderInput(ns("bins"),
+              "max bins for vega:",
+              min = 1,
+              max = 50,
+              value = 30)
 }
 
 vegaPlotServer <- function(id) {
