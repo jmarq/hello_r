@@ -33,7 +33,8 @@ shinyUI(fluidPage(
        plotOutput("distPlot"),
        plotOutput("simplePlot"),
        # using my Shiny module's UI function
-       vegaModule$vegaPlotUI("vegaId")
+       vegaModule$vegaPlotUI("vegaId"),
+       plotOutput("irisPlot")
     )
   )
 ))

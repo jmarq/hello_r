@@ -7,6 +7,7 @@ vegaPlotUI <- function(id, label = "vegaPlotLabel") {
   # namespace "translation" function
   ns <- NS(id)
   div(
+    id="yes",
     h1("vega time, pals"),
     p("trying out Shiny modules and this vegalite R package"),
     vegaliteOutput(ns("vegaPlot"))

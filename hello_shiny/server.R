@@ -32,6 +32,10 @@ shinyServer(function(input, output) {
     plot(nums, multiplied_nums)
     
   })
+  
+  output$irisPlot <- renderPlot({
+    plot(iris, col=unclass(iris$Species), pch=unclass(iris$Species))
+  })
 
   # two types of modules used here
   # a shiny module that has been encapsulated as an R module
