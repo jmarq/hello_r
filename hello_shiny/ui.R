@@ -8,6 +8,8 @@
 #
 
 library(shiny)
+library(vegalite)
+vegaModule <- modules::use("vegaPlot.R")
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -29,6 +31,8 @@ shinyUI(fluidPage(
     mainPanel(
        plotOutput("distPlot"),
        plotOutput("simplePlot"),
-       vegaliteOutput("vegaPlot")    )
+       # using my Shiny module's UI function
+       vegaModule$vegaPlotUI("vegaId")
+    )
   )
 ))

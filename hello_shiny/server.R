@@ -8,7 +8,8 @@
 #
 
 library(shiny)
-library(vegalite)
+
+vegaModule <- modules::use("vegaPlot.R")
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
@@ -32,14 +33,8 @@ shinyServer(function(input, output) {
     
   })
 
-  output$vegaPlot <- renderVegalite({
-    vegalite(viewport_width=500, viewport_height=500) %>%
-      cell_size(400, 400) %>%
-      add_data(faithful) %>%
-      encode_x("waiting", "quantitative") %>%
-      encode_y("eruptions", "quantitative") %>%
-      bin_x(maxbins=input$bins) %>%
-      mark_point()
-  })
-  
+  # two types of modules used here
+  # a shiny module that has been encapsulated as an R module
+  # here we are calling the R module's Shiny module server method
+  vegaModule$vegaPlotServer("vegaId")
 })
