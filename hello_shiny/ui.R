@@ -31,9 +31,9 @@ shinyUI(fluidPage(
     # Show a plot of the generated distribution
     mainPanel(
        plotOutput("distPlot"),
-       plotOutput("simplePlot"),
        # using my Shiny module's UI function
        vegaModule$vegaPlotUI("vegaId"),
+       plotOutput("simplePlot"),
        plotOutput("irisPlot"),
        plotOutput("ggplot")
     )

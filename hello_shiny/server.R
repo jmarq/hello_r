@@ -35,7 +35,7 @@ shinyServer(function(input, output) {
   })
   
   output$ggplot <- renderPlot({
-    ggplot(mpg, aes(displ, hwy, colour = class)) + 
+    ggplot(iris, aes(Sepal.Width, Petal.Width, colour = Species)) + 
       geom_point()
   })
   
