@@ -8,6 +8,7 @@
 #
 
 library(shiny)
+library(ggplot2)
 
 vegaModule <- modules::use("vegaPlot.R")
 
@@ -31,6 +32,11 @@ shinyServer(function(input, output) {
     multiplied_nums <- nums * input$bins
     plot(nums, multiplied_nums)
     
+  })
+  
+  output$ggplot <- renderPlot({
+    ggplot(mpg, aes(displ, hwy, colour = class)) + 
+      geom_point()
   })
   
   output$irisPlot <- renderPlot({
