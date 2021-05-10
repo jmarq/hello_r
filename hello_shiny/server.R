@@ -36,7 +36,7 @@ shinyServer(function(input, output) {
   
   output$ggplot <- renderPlot({
     ggplot(iris, aes(Sepal.Width, Petal.Width, colour = Species)) + 
-      geom_point()
+      geom_point() + geom_smooth(mapping=aes(),method = "lm", se = FALSE)
   })
   
   output$irisPlot <- renderPlot({
