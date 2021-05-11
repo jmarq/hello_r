@@ -28,8 +28,10 @@ t.test(data=df1, lifeExp ~ country)
 
 
 gapminder %>%
-  filter(continent=="Americas") %>%
-  ggplot(aes(x=year, y=lifeExp, col=country))+
-  geom_line(alpha=0.5)
+  # filter(continent=="Americas") %>%
+  ggplot(aes(x=log(gdpPercap), y=lifeExp, col=year, size=pop))+
+  geom_point(alpha=0.5)+
+  geom_smooth(method=lm) +
+  facet_wrap(~continent)
 
   
