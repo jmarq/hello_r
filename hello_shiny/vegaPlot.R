@@ -8,7 +8,7 @@ vegaPlotUI <- function(id, label = "vegaPlotLabel") {
   ns <- NS(id)
   div(
     id="yes",
-    h1("vega time, pals"),
+    h1("vega time"),
     p("trying out Shiny modules and this vegalite R package"),
     vegaliteOutput(ns("vegaPlot"))
   )

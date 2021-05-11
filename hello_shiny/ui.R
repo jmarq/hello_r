@@ -21,7 +21,7 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
        sliderInput("bins",
-                   "Number of bins:",
+                   "Number of bins for histogram:",
                    min = 1,
                    max = 50,
                    value = 30),
@@ -35,6 +35,7 @@ shinyUI(fluidPage(
        vegaModule$vegaPlotUI("vegaId"),
        plotOutput("simplePlot"),
        plotOutput("irisPlot"),
+       h1("ggplot2"),
        plotOutput("ggplot")
     )
   )
