@@ -34,4 +34,7 @@ gapminder %>%
   geom_smooth(method=lm) +
   facet_wrap(~continent)
 
+worldYears <- gapminder %>% group_by(year) %>% summarise(life_mean=mean(lifeExp))
+worldYears %>% ggplot(aes(x=year, y=life_mean)) + geom_line()
+
   
