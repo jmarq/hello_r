@@ -10,6 +10,8 @@
 library(shiny)
 library(vegalite)
 vegaModule <- modules::use("vegaPlot.R")
+gapminderModule <- modules::use("gapminder_shiny_module.R")
+
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -21,7 +23,7 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
       radioButtons("page", label = h3("pages"),
-                   choices = list("vegalite" = 1, "ggplot2" = 2, "r plots" = 3), 
+                   choices = list("vegalite" = 1, "ggplot2" = 2, "r plots" = 3, "gapminder" = 4), 
                    selected = 1),
       conditionalPanel("input.page == 1",
                    vegaModule$vegaPlotInput("vegaId")
@@ -32,6 +34,9 @@ shinyUI(fluidPage(
                                    min = 1,
                                    max = 50,
                                    value = 30)
+      ),
+      conditionalPanel("input.page == 4",
+                       gapminderModule$gapminderInput("gapminderId")
       )
     ),
     
@@ -51,6 +56,9 @@ shinyUI(fluidPage(
                        plotOutput("distPlot"),
                        plotOutput("simplePlot"),
                        plotOutput("irisPlot")      
+      ),
+      conditionalPanel("input.page == 4",
+                       gapminderModule$gapminderUI("gapminderId")
       )
       
     )

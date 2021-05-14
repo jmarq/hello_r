@@ -11,6 +11,7 @@ library(shiny)
 library(ggplot2)
 
 vegaModule <- modules::use("vegaPlot.R")
+gapminderModule <- modules::use("gapminder_shiny_module.R")
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
@@ -34,17 +35,23 @@ shinyServer(function(input, output) {
     
   })
   
-  output$ggplot <- renderPlot({
-    ggplot(iris, aes(Sepal.Width, Petal.Width, colour = Species)) + 
-      geom_point() + geom_smooth(method = "lm", se = TRUE)
-  })
   
   output$irisPlot <- renderPlot({
     plot(iris, col=unclass(iris$Species), pch=unclass(iris$Species))
   })
+  
+  
+  output$ggplot <- renderPlot({
+    print("rendering ggplot")
+    ggplot(iris, aes(Sepal.Width, Petal.Width, colour = Species)) + 
+      geom_point() + geom_smooth(method = "lm", se = TRUE)
+  })
+  
+
 
   # two types of modules used here
   # a shiny module that has been encapsulated as an R module
   # here we are calling the R module's Shiny module server method
   vegaModule$vegaPlotServer("vegaId")
+  gapminderModule$gapminderServer("gapminderId")
 })
