@@ -41,4 +41,13 @@ hwy_means <- mpg %>% group_by(manufacturer) %>% summarise(hwy_mean=mean(hwy), di
 plot(hwy_means$hwy_mean ~ hwy_means$disp_mean)
 abline(lm(hwy_means$hwy_mean ~ hwy_means$disp_mean), col="red")
 
+mean_per_year <- gapminder %>%
+  group_by(continent, year) %>%
+  summarise(mean_lifeExp=mean(lifeExp), .groups="keep")
+
+mean_per_year %>%
+  ggplot(aes(x=year, y=mean_lifeExp, col=continent)) +
+  geom_line() +
+  geom_smooth(method=lm, linetype="dotted",aes(fill=continent), col="#888888")
+
   
