@@ -20,23 +20,39 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
-       sliderInput("bins",
-                   "Number of bins for histogram:",
-                   min = 1,
-                   max = 50,
-                   value = 30),
-       vegaModule$vegaPlotInput("vegaId")
+      radioButtons("page", label = h3("pages"),
+                   choices = list("vegalite" = 1, "ggplot2" = 2, "r plots" = 3), 
+                   selected = 1),
+      conditionalPanel("input.page == 1",
+                   vegaModule$vegaPlotInput("vegaId")
+      ),
+      conditionalPanel("input.page == 3",
+                       sliderInput("bins",
+                                   "Number of bins for histogram:",
+                                   min = 1,
+                                   max = 50,
+                                   value = 30)
+      )
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
-       plotOutput("distPlot"),
-       # using my Shiny module's UI function
-       vegaModule$vegaPlotUI("vegaId"),
-       plotOutput("simplePlot"),
-       plotOutput("irisPlot"),
-       h1("ggplot2"),
-       plotOutput("ggplot")
+      conditionalPanel("input.page == 1",
+      # vega
+        vegaModule$vegaPlotUI("vegaId")
+      ),
+      conditionalPanel("input.page == 2",
+                       # ggplot2
+                       h1("ggplot2"),
+                       plotOutput("ggplot")
+      ),
+      conditionalPanel("input.page == 3",
+                       # "regular" plots
+                       plotOutput("distPlot"),
+                       plotOutput("simplePlot"),
+                       plotOutput("irisPlot")      
+      )
+      
     )
   )
 ))
