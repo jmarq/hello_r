@@ -10,7 +10,7 @@ gapminderUI <- function(id, label = "gapminderPlotLabel") {
   # namespace "translation" function
   ns <- NS(id)
   div(
-    id="yes",
+    id=ns("gapminder_plots"),
     h1("explore gapminder data"),
     plotOutput(ns("gapminderPlot")),
     plotOutput(ns("meanLinesPlot"))
