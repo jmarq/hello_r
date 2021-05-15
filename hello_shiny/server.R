@@ -47,8 +47,22 @@ shinyServer(function(input, output) {
       geom_point() + geom_smooth(method = "lm", se = TRUE)
   })
   
-
-
+  output$css <- renderUI({
+    cssFile <- "hello.css"
+    print(input$page)
+    if(strtoi(input$page) %% 2){
+      cssFile <- "hello2.css"
+    }
+    tags$head(
+      # Note the wrapping of the string in HTML()
+      # can we make this a singleton to avoid multiple requests?
+      # hmm but then would we be able to swap it out?
+      # maybe conditionally setting a css class on a wrapper element would be better?
+      # how exactly would that be accomplished?
+      tags$link(rel = "stylesheet", type = "text/css", href = cssFile)
+    )
+  })
+  
   # two types of modules used here
   # a shiny module that has been encapsulated as an R module
   # here we are calling the R module's Shiny module server method
