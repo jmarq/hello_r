@@ -54,12 +54,8 @@ shinyServer(function(input, output) {
       cssFile <- "hello2.css"
     }
     tags$head(
-      # Note the wrapping of the string in HTML()
-      # can we make this a singleton to avoid multiple requests?
-      # hmm but then would we be able to swap it out?
-      # maybe conditionally setting a css class on a wrapper element would be better?
-      # how exactly would that be accomplished?
-      tags$link(rel = "stylesheet", type = "text/css", href = cssFile)
+      # singleton to avoid loading the stylesheet multiple times
+      singleton(tags$link(rel = "stylesheet", type = "text/css", href = cssFile))
     )
   })
   
