@@ -48,13 +48,13 @@ shinyServer(function(input, output) {
   })
   
   output$css <- renderUI({
-    cssFile <- "hello.css"
+    odd <- strtoi(input$page) %% 2
+    cssFile <- if(odd) "hello.css" else "hello2.css"
     print(input$page)
-    if(strtoi(input$page) %% 2){
-      cssFile <- "hello2.css"
-    }
     tags$head(
       # singleton to avoid loading the stylesheet multiple times
+      # hmmm. this results in two stylesheets, with the latter maintaining authority.
+      # maybe removeUI/insertUI could be used?
       singleton(tags$link(rel = "stylesheet", type = "text/css", href = cssFile))
     )
   })
